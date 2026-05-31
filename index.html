@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Product Intern Assignment · 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+<style>
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;
+  background:#f2f0eb;
+  color:#1c1b18;
+  -webkit-font-smoothing:antialiased;
+  font-size:15px;
+  line-height:1.65;
+}
+
+/* ===== HEADER ===== */
+.site-header{
+  background:#16151a;
+  padding:0 52px;
+  display:flex;
+  align-items:stretch;
+  justify-content:space-between;
+  min-height:72px;
+}
+.header-left{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.header-left h1{
+  font-size:1.3rem;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:-0.02em;
+}
+.year-tag{
+  font-size:0.68rem;
+  font-weight:700;
+  letter-spacing:0.1em;
+  color:rgba(255,255,255,.35);
+  text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.15);
+  padding:4px 10px;
+  border-radius:4px;
+}
+.header-right{
+  display:flex;
+  align-items:center;
+}
+.deadline-badge{
+  background:#d94820;
+  color:#fff;
+  font-size:0.65rem;
+  font-weight:800;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  padding:0 18px;
+  height:100%;
+  display:flex;
+  align-items:center;
+}
+
+/* ===== SKILLS STRIP ===== */
+.skills-strip{
+  background:#fff;
+  border-bottom:1px solid #e2dfd8;
+  padding:12px 52px;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+}
+.skill{
+  font-size:0.76rem;
+  font-weight:600;
+  color:#5a5650;
+  border:1px solid #dddad3;
+  border-radius:5px;
+  padding:5px 14px;
+  background:#faf9f6;
+  letter-spacing:0.01em;
+  transition:border-color .15s,color .15s;
+}
+.skill:hover{border-color:#5b4fff;color:#5b4fff}
+
+/* ===== PAGE WRAPPER ===== */
+.page{
+  max-width:920px;
+  margin:0 auto;
+  padding:44px 40px 88px;
+}
+
+/* ===== COMPANY CARDS ===== */
+.card{
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid #dedad2;
+  margin-bottom:22px;
+  background:#fff;
+  box-shadow:0 1px 8px rgba(0,0,0,.05);
+  opacity:0;
+  transform:translateY(18px);
+  transition:opacity .5s ease,transform .5s ease,box-shadow .2s;
+}
+.card.visible{opacity:1;transform:translateY(0)}
+.card:hover{box-shadow:0 8px 32px rgba(0,0,0,.1)}
+
+/* card header bands */
+.card-band{
+  padding:20px 28px 18px;
+}
+.vl .card-band{background:#5b4fff}
+.ss .card-band{background:#1b7a52}
+
+.card-band h2{
+  font-size:1.25rem;
+  font-weight:800;
+  color:#fff;
+  letter-spacing:-0.01em;
+  margin-bottom:4px;
+}
+.card-band p{
+  font-size:0.8rem;
+  color:rgba(255,255,255,.7);
+  font-style:italic;
+  font-weight:400;
+}
+
+/* card columns */
+.card-cols{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+}
+.card-col{
+  padding:26px 28px;
+}
+.card-col:first-child{
+  border-right:1px solid #f0ece5;
+}
+
+.col-head{
+  font-size:0.63rem;
+  font-weight:800;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.vl .col-head.feat{color:#5b4fff}
+.ss .col-head.feat{color:#1b7a52}
+.col-head.moat{color:#b95e18}
+
+.item-list{list-style:none}
+.item-list li{
+  font-size:0.84rem;
+  color:#3d3b36;
+  padding:9px 0 9px 16px;
+  border-bottom:1px solid #f4f0ea;
+  position:relative;
+  line-height:1.55;
+}
+.item-list li:last-child{border-bottom:none;padding-bottom:0}
+.item-list li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:18px;
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:#ccc9c2;
+}
+.vl .feat-col li::before{background:#a89dfc}
+.ss .feat-col li::before{background:#74c6a0}
+.moat-col li::before{background:#f0a96e}
+
+/* ===== SECTION TITLE ===== */
+.sec-title{
+  font-size:0.7rem;
+  font-weight:800;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:#2855a0;
+  margin-bottom:14px;
+  margin-top:48px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.sec-title::after{
+  content:'';
+  flex:1;
+  height:1px;
+  background:#d8d4cc;
+}
+
+/* ===== THE TASK ===== */
+.task-body{
+  font-size:0.93rem;
+  color:#2a2925;
+  line-height:1.75;
+}
+.task-body strong{font-weight:700}
+.task-body em{font-style:italic}
+
+/* ===== PILLARS ===== */
+.pillars{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:24px 0 14px;
+}
+.pill{
+  font-size:0.78rem;
+  font-weight:600;
+  color:#555;
+  border:1px solid #ccc9c0;
+  border-radius:6px;
+  padding:7px 18px;
+  background:#fff;
+  cursor:pointer;
+  transition:all .15s;
+  user-select:none;
+}
+.pill:hover{border-color:#5b4fff;color:#5b4fff}
+.pill.on{background:#16151a;color:#fff;border-color:#16151a}
+
+.fw-note{
+  font-size:0.79rem;
+  color:#999;
+  font-style:italic;
+  margin-bottom:30px;
+}
+
+/* ===== FEEDBACK STRUCTURE ===== */
+.fb-label{
+  font-size:0.85rem;
+  font-weight:700;
+  color:#1c1b18;
+  margin-bottom:12px;
+}
+.fb-table{
+  border:1px solid #e2ddd5;
+  border-radius:10px;
+  overflow:hidden;
+  background:#fff;
+}
+.fb-row{
+  display:grid;
+  grid-template-columns:148px 1fr;
+  border-bottom:1px solid #f0ece4;
+}
+.fb-row:last-child{border-bottom:none}
+.fb-key{
+  font-size:0.83rem;
+  font-weight:700;
+  color:#1c1b18;
+  padding:13px 18px;
+  background:#f7f5f0;
+  border-right:1px solid #ece8e0;
+  display:flex;
+  align-items:center;
+}
+.fb-val{
+  font-size:0.83rem;
+  color:#5a5650;
+  padding:13px 18px;
+  display:flex;
+  align-items:center;
+}
+
+/* ===== EVALUATION ===== */
+.eval-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:18px;
+}
+.eval-box{
+  border-radius:10px;
+  padding:22px 24px;
+  border:1px solid transparent;
+}
+.eval-box.go{background:#ebf5f0;border-color:#b6ddc8}
+.eval-box.no{background:#fdf0ee;border-color:#f4c4bc}
+
+.eval-head{
+  font-size:0.63rem;
+  font-weight:800;
+  letter-spacing:0.17em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.eval-box.go .eval-head{color:#1a7042}
+.eval-box.no .eval-head{color:#b53a28}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot-g{background:#1a7042}
+.dot-r{background:#b53a28}
+
+.eval-items{list-style:none}
+.eval-items li{
+  font-size:0.83rem;
+  color:#2a2925;
+  padding:7px 0 7px 15px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  position:relative;
+  line-height:1.5;
+}
+.eval-items li:last-child{border-bottom:none;padding-bottom:0}
+.eval-items li::before{
+  content:'•';
+  position:absolute;left:0;top:7px;
+  font-size:0.7rem;
+}
+.eval-box.go .eval-items li::before{color:#1a7042}
+.eval-box.no .eval-items li::before{color:#b53a28}
+
+.eval-note{
+  font-size:0.8rem;
+  color:#999;
+  font-style:italic;
+  text-align:center;
+  margin-top:4px;
+}
+
+/* ===== NEXT STEPS ===== */
+.steps{display:flex;flex-direction:column;gap:0}
+.step{
+  display:flex;
+  align-items:flex-start;
+  gap:18px;
+  padding:18px 0;
+  border-bottom:1px solid #e8e4dc;
+}
+.step:last-child{border-bottom:none}
+.step-n{
+  width:34px;height:34px;min-width:34px;
+  border-radius:9px;
+  font-size:0.82rem;font-weight:800;
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:1px;
+}
+.n-blue{background:#5b4fff}
+.n-red{background:#d94820}
+.step-p{
+  font-size:0.9rem;
+  color:#2a2925;
+  padding-top:6px;
+  line-height:1.7;
+}
+.step-p.dl{
+  color:#d94820;
+  font-weight:700;
+  font-size:0.95rem;
+}
+.timer{
+  display:inline-flex;
+  align-items:center;
+  background:#fff2ee;
+  border:1px solid #f5c0b0;
+  color:#d94820;
+  font-size:0.72rem;
+  font-weight:700;
+  padding:2px 10px;
+  border-radius:4px;
+  margin-left:10px;
+  letter-spacing:0.04em;
+  vertical-align:middle;
+}
+
+/* ===== FOOTER ===== */
+.site-footer{
+  background:#16151a;
+  padding:22px 52px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.site-footer span{
+  font-size:0.76rem;
+  color:rgba(255,255,255,.35);
+}
+.site-footer .brands{color:rgba(255,255,255,.5)}
+
+/* ===== SCROLL REVEAL ===== */
+.reveal{
+  opacity:0;
+  transform:translateY(16px);
+  transition:opacity .55s ease,transform .55s ease;
+}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:640px){
+  .site-header{padding:0 20px}
+  .skills-strip{padding:10px 20px}
+  .page{padding:28px 20px 60px}
+  .card-cols{grid-template-columns:1fr}
+  .card-col:first-child{border-right:none;border-bottom:1px solid #f0ece5}
+  .eval-grid{grid-template-columns:1fr}
+  .fb-row{grid-template-columns:1fr}
+  .fb-key{border-right:none;border-bottom:1px solid #ece8e0}
+  .site-footer{padding:18px 20px;flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="header-left">
+    <h1>Product Intern Assignment</h1>
+    <span class="year-tag">2026</span>
+  </div>
+  <div class="header-right">
+    <div class="deadline-badge">Deadline</div>
+  </div>
+</header>
+
+<!-- ══ SKILLS STRIP ══ -->
+<div class="skills-strip">
+  <span class="skill">Market Research</span>
+  <span class="skill">Data Analysis</span>
+  <span class="skill">Competitor Research</span>
+  <span class="skill">Product Management</span>
+  <span class="skill">Problem Solving</span>
+</div>
+
+<!-- ══ PAGE ══ -->
+<div class="page">
+
+  <!-- VOCALLABS CARD -->
+  <div class="card vl">
+    <div class="card-band">
+      <h2>Vocallabs.ai</h2>
+      <p>AI voice agents automating business calls with human-like fluency</p>
+    </div>
+    <div class="card-cols">
+      <div class="card-col feat-col">
+        <div class="col-head feat">Features</div>
+        <ul class="item-list">
+          <li>AI voice agents for sales, support &amp; booking — natural, unscripted flows</li>
+          <li>Intelligent Call Flow Builder for customizable AI call scripts</li>
+          <li>SDK, n8n node &amp; Chrome extension for workflow automation</li>
+          <li>Hybrid model: seamless AI ↔ live agent transitions</li>
+          <li>Voice analytics: emotion, intent &amp; tone beyond transcription</li>
+        </ul>
+      </div>
+      <div class="card-col moat-col">
+        <div class="col-head moat">Moats</div>
+        <ul class="item-list">
+          <li>Full-stack ownership: design → execution → analytics</li>
+          <li>India-first: tuned for local languages, accents &amp; workflows</li>
+          <li>Founder conviction: Joey Dash goes all-in post-Subspace</li>
+          <li>Data flywheel: proprietary conversation intelligence at scale</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBSPACE CARD -->
+  <div class="card ss">
+    <div class="card-band">
+      <h2>Subspace.money</h2>
+      <p>Subscribe to anything, delivered in minutes — Subscriptions · Sharing · Rentals</p>
+    </div>
+    <div class="card-cols">
+      <div class="card-col feat-col">
+        <div class="col-head feat">Features</div>
+        <ul class="item-list">
+          <li>Subscription mgmt, group finance, bill splitting &amp; expense tracking</li>
+          <li>Auto-detection &amp; categorization of recurring payments via API</li>
+          <li>Bill payments, digital subscriptions, gift cards — Android / iOS / Web</li>
+          <li>90%+ ops powered by autonomous AI agents</li>
+          <li>India's first subscription marketplace for local providers</li>
+        </ul>
+      </div>
+      <div class="card-col moat-col">
+        <div class="col-head moat">Moats</div>
+        <ul class="item-list">
+          <li>Bootstrapped &amp; profitable — rare in consumer fintech</li>
+          <li>Network effects: group sharing gets stickier with more users</li>
+          <li>Negotiate API: automated price negotiation = hard to replicate</li>
+          <li>AI-native ops: structurally lower costs at scale</li>
+          <li>Rs.36.5 Cr ARR (FY25) with zero external funding</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE TASK -->
+  <div class="reveal">
+    <h2 class="sec-title">The Task</h2>
+    <p class="task-body">
+      Pick <strong>one</strong> of the two companies. Deliver a <strong>product teardown</strong> —
+      your <strong>5 sharpest feedbacks</strong> across the Product Pillars below.
+      This is not a filter exercise; whoever joins <em>owns and executes</em> these from Day 1.
+    </p>
+
+    <div class="pillars" id="pillars">
+      <button class="pill on">GTM &amp; ICPs</button>
+      <button class="pill">Competitor Analysis</button>
+      <button class="pill">Features / Services</button>
+      <button class="pill">UX</button>
+      <button class="pill">Potential Collaborations</button>
+    </div>
+
+    <p class="fw-note">Use SWOT / 7Ps / Porter's Five Forces or any framework at your disposal.</p>
+
+    <p class="fb-label">Structure each feedback:</p>
+    <div class="fb-table">
+      <div class="fb-row">
+        <div class="fb-key">(a) Observed</div>
+        <div class="fb-val">What you actually saw in the app / website / flow</div>
+      </div>
+      <div class="fb-row">
+        <div class="fb-key">(b) Problem</div>
+        <div class="fb-val">Why it matters — the real user or business pain</div>
+      </div>
+      <div class="fb-row">
+        <div class="fb-key">(c) Ship instead</div>
+        <div class="fb-val">Your specific, actionable solution</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOW WE'LL EVALUATE -->
+  <div class="reveal">
+    <h2 class="sec-title">How We'll Evaluate</h2>
+    <div class="eval-grid">
+      <div class="eval-box go">
+        <div class="eval-head"><span class="dot dot-g"></span>Moves Forward</div>
+        <ul class="eval-items">
+          <li>Real, non-obvious observation</li>
+          <li>Specific screens / copy / flows</li>
+          <li>Tradeoff thinking</li>
+          <li>Clear observation → problem → solution chain</li>
+          <li>Prioritisation logic</li>
+        </ul>
+      </div>
+      <div class="eval-box no">
+        <div class="eval-head"><span class="dot dot-r"></span>Doesn't Move Forward</div>
+        <ul class="eval-items">
+          <li>Generic feedback ("improve UX", "add gamification")</li>
+          <li>All 5 in one area</li>
+          <li>Features without an observed problem</li>
+          <li>Obvious signs the app wasn't used</li>
+          <li>Polished but shallow</li>
+        </ul>
+      </div>
+    </div>
+    <p class="eval-note">We don't care about CV brand. We care whether you used the app, thought hard, and can communicate it clearly.</p>
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div class="reveal">
+    <h2 class="sec-title">Next Steps</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n n-blue">1</div>
+        <p class="step-p">Go through the Website and Apps — use it like a real customer.</p>
+      </div>
+      <div class="step">
+        <div class="step-n n-blue">2</div>
+        <p class="step-p">Attach supporting docs, slides, screenshots, or walkthroughs in your report.</p>
+      </div>
+      <div class="step">
+        <div class="step-n n-blue">3</div>
+        <p class="step-p">Feel free to use Gen AI tools — but keep your feedback authentic, research-backed, and make sure you distinguish yourself from other applicants.</p>
+      </div>
+      <div class="step">
+        <div class="step-n n-red">4</div>
+        <p class="step-p dl">
+          Deadline: Sunday, 31 May 2026, 11:59 PM IST
+          <span class="timer" id="timer"></span>
+        </p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer">
+  <span class="brands">Vocallabs.ai &nbsp;·&nbsp; Subspace.money</span>
+  <span>Product Intern Assignment &nbsp;·&nbsp; 2026</span>
+</footer>
+
+<script>
+(function(){
+
+  /* ── Pillar tabs ── */
+  var pillarsEl = document.getElementById('pillars');
+  if(pillarsEl){
+    pillarsEl.addEventListener('click',function(e){
+      var btn = e.target.closest('.pill');
+      if(!btn) return;
+      pillarsEl.querySelectorAll('.pill').forEach(function(b){b.classList.remove('on')});
+      btn.classList.add('on');
+    });
+  }
+
+  /* ── Countdown ── */
+  function tick(){
+    var dl = new Date('2026-05-31T23:59:00+05:30').getTime();
+    var now = Date.now();
+    var el = document.getElementById('timer');
+    if(!el) return;
+    var diff = dl - now;
+    if(diff <= 0){ el.textContent = 'CLOSED'; return; }
+    var h = Math.floor(diff/3600000);
+    var m = Math.floor((diff%3600000)/60000);
+    var s = Math.floor((diff%60000)/1000);
+    el.textContent = h+'h '+m+'m '+s+'s left';
+  }
+  tick();
+  setInterval(tick,1000);
+
+  /* ── Company cards reveal on load ── */
+  var cards = document.querySelectorAll('.card');
+  cards.forEach(function(c,i){
+    setTimeout(function(){ c.classList.add('visible'); }, i*120 + 80);
+  });
+
+  /* ── Scroll reveal for other sections ── */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      }
+    });
+  },{threshold:0.08});
+
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+})();
+</script>
+</body>
+</html>
